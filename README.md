@@ -233,7 +233,9 @@ def createBox(img,points,scale=5,masked=False,cropped = True):
     else:
      return mask 
 ~~~
-A idéia da função **createBox** é capturar a região do lábio. Para isso, passamos nossa imagem de entrada e os pontos referentes a região do lábio. No corpo da função, criamos uma máscara que terá as mesmas dimenções da imagem de entrada e na cor preta, isso será necessário para desensamos os pontos desejados na mesma posição da imagem de entrada sendo necessário a função **fillPoly** do OpenCV. Ela irá desenhar o contorno do lábio com o preenchimento na cor branca. Com a opção **masked = True e crooped = false**, a função retorna a máscara com lábio branco e o fundo preto. A opção com **cropped = True** servirá para pŕóximas versões do projeto, com ela podemos fazer o recorte do lábio diretamente da imagem de entrada.
+A idéia da função **createBox** é capturar a região do lábio. Para isso, passamos nossa imagem de entrada e os pontos referentes a região do lábio. No corpo da função, criamos uma máscara que terá as mesmas dimenções da imagem de entrada e na cor preta, isso é necessário para desenharmos os pontos desejados na mesma posição da imagem de entrada. A função **fillPoly** do OpenCV irá desenhar o contorno do lábio de forma poligonal com o preenchimento na cor branca, de forma a torna a aproximação da região mais precisa. Com a opção **masked = True e crooped = false**, a função retorna a máscara com lábio branco e o fundo preto. 
+
+>A linha que consta um novo **bitwise_and** dá a possibilidade de termos a região do lábio a cores como na imagem de entrada. Já opção com **cropped = True** >servirá para pŕóximas versões do projeto, com ela podemos fazer o recorte do lábio diretamente da imagem de entrada. Ambas linhas, serão aproveitadas em uma nova versão do programa que implementará mais requisitos
     
 
 
