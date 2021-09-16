@@ -127,6 +127,7 @@ while True:
                 x = landmarks.part(n).x
                 y = landmarks.part(n).y
                 myPoints.append([x,y])
+                #cv2.circle(imgO,(x,y),2,(0,255,0),cv2.FILLED)  
                 
             myPoints = np.array(myPoints) 
             imgLips = createBox(img,myPoints[48:61],3,True,False)   
