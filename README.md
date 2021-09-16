@@ -8,9 +8,20 @@ O provador de cores de batons, Lipstick Digital é um projeto desenvolvido para 
 
 A proposta do projeto é simular a cor de um batom através de um arquivo de imagem ou em tempo real com auxílio de uma webcam. É utilizado uma Machine learning treinada que detecta o rosto na imagem e atribui pontos de coordenadas para cada parte dele. Além disso é possível selecionar um efeito em escala de cinza na imagem exceto na região dos lábios.
 
+## Instalação
+
+1. Instale o Python Versão 3.8
+2. Instale a biblioteca dlib para a Machine Learning
+3. Garanta que seu ambiente tenha as bibliotecas tkinter e numby
+4. Baixe o arquivo: <a href="https://github.com/davisking/dlib-models" target="_blank">shape_predictor_68_face_landmarks.dat</a>.
+5. Execute na sua IDE favorita
+
 ## Manual do Usuário
 
-Ao executar o programa, o usuário será solicitado a inserir uma imagem que será logo exibida. Depois isso, ele deverá digitar ctrl + p para abrir o menu de opções. Entre as opções estão as denominadas cores: Aphrodite, Athena e Hera, o efeito Gray Effect, a opção com cores, o botão para capturar a imagem da câmera, a opção de salvar a imagem, o botão de cancelar a cor do batom e a opção sair.
+Ao executar o programa, o usuário será solicitado a inserir uma imagem que será logo exibida. Depois isso, ele deverá digitar 
+**CTRL + P** para abrir o menu de opções. Entre as opções estão as denominadas cores: Aphrodite, Athena e Hera, o efeito 
+Gray Effect, a opção com cores, o botão para capturar a imagem da câmera, a opção de salvar a imagem, o botão de cancelar
+a cor do batom e a opção sair.
 
 ## Código e Funcionamento
 ~~~py
