@@ -127,19 +127,19 @@ while True:
                 myPoints.append([x,y])
                 #cv2.circle(ImgO,(x,y),2,(0,255,0),cv2.FILLED)  
                 
-            myPoints = np.array(myPoints) 
-            imgLips = createBox(img,myPoints[48:61],3,True,False)   
-                        
-            ImgColor = np.zeros_like(imgLips) 
-            ImgColor [:] = color
-        
-            ImgColor = cv2.bitwise_and(imgLips,ImgColor) 
-            
-            ImgColor = cv2.GaussianBlur(ImgColor,(7,7),10) 
-            
-            ImgColor = gray(ImgO,set) 
+    myPoints = np.array(myPoints) 
+    imgLips = createBox(img,myPoints[48:61],3,True,False)   
 
-            cv2.imshow('Lipstick Digital',ImgColor)
+    ImgColor = np.zeros_like(imgLips) 
+    ImgColor [:] = color
+
+    ImgColor = cv2.bitwise_and(imgLips,ImgColor) 
+
+    ImgColor = cv2.GaussianBlur(ImgColor,(7,7),10) 
+
+    ImgColor = gray(ImgO,set) 
+
+    cv2.imshow('Lipstick Digital',ImgColor)
 
     cv2.waitKey(30)
 
