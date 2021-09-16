@@ -24,6 +24,8 @@ Ao executar o programa, o usuário será solicitado a inserir uma imagem que ser
 Gray Effect, a opção com cores, o botão para capturar a imagem da câmera, a opção de salvar a imagem, o botão de cancelar
 a cor do batom e a opção sair.
 
+![Interface Gráfica](/images/interface.png)
+
 ## Código e Funcionamento
 ~~~py
 import cv2
