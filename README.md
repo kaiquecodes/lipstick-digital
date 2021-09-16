@@ -10,11 +10,12 @@ A proposta do projeto é simular a cor de um batom através de um arquivo de ima
 
 ## Instalação
 
-1. Instale o Python Versão 3.8
-2. Instale a biblioteca dlib para a Machine Learning
-3. Garanta que seu ambiente tenha as bibliotecas tkinter e numby
-4. Baixe o arquivo: <a href="https://github.com/davisking/dlib-models" target="_blank">shape_predictor_68_face_landmarks.dat</a>.
-5. Execute na sua IDE favorita
+1. Instale o Python Versão 3.8.
+3. Instale a biblioteca OpenCV.
+3. Instale a biblioteca dlib para a Machine Learning.
+4. Garanta que seu ambiente tenha as bibliotecas tkinter e numby.
+5. Baixe o arquivo: <a href="https://github.com/davisking/dlib-models" target="_blank">shape_predictor_68_face_landmarks.dat</a>.
+6. Execute na sua IDE favorita.
 
 ## Manual do Usuário
 
