@@ -119,8 +119,6 @@ while True:
     faces = detector(imgGray) 
 
     for face in faces:
-            x1 , y1 = face.left(), face.top()
-            x2 , y2 = face.right(), face.bottom()      
             landmarks = predictor (imgGray,face) 
             myPoints = [] 
             for n in range(68):
