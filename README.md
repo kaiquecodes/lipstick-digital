@@ -6,14 +6,14 @@ O Lipstick Digital é um projeto desenvolvido para a disciplina de Processamento
 
 ## Introdução
 
-A proposta do projeto é simular a cor de um batom através de um arquivo de imagem ou em tempo real com auxílio de uma webcam. É utilizado uma Machine learning treinada que detecta o rosto na imagem e atribui pontos de coordenadas para cada parte dele. Além disso é possível selecionar um efeito em escala de cinza na imagem exceto na região dos lábios.
+A proposta do projeto é simular a cor de um batom através de um arquivo de imagem ou em tempo real com auxílio de uma webcam. É utilizado uma Machine learning treinada que detecta o rosto na imagem e atribui pontos de coordenadas para cada parte dele. Além disso, é possível selecionar um efeito em escala de cinza na imagem exceto na região dos lábios.
 
 ## Instalação
 
 1. Instale o Python Versão 3.8.
 3. Instale a biblioteca OpenCV.
 3. Instale a biblioteca dlib para a Machine Learning.
-4. Garanta que seu ambiente tenha as bibliotecas tkinter e numby.
+4. Garanta que seu ambiente tenha as bibliotecas tkinter e numpy.
 5. Baixe o arquivo: <a href="https://github.com/davisking/dlib-models" target="_blank">shape_predictor_68_face_landmarks.dat</a>.
 6. Execute na sua IDE favorita.
 
@@ -212,12 +212,28 @@ Nessa parte, temos o núcleo do sistema, transformamos em um **myPoints** em **n
 >Observe que todas as imagens citadas até agora, contém as mesmas dimensões da imagem de entrada.
 >Isto é fundamental para que nosso "merge" de imagens tenha sucesso.
 
-Além disso, teremos que desfocar a imagem **ImgColor** que contém a forma do lábio já pintado. Para isso, utilizamos o método **GaussianBlur** que irá desfocar as bordas do nosso lábio tornando mais natural seu contorno.
+Além disso, teremos que desfocar a imagem **ImgColor** que contém a forma do lábio já pintado. Para isso, utilizamos o método **GaussianBlur** do OpenCV que irá desfocar as bordas do nosso lábio tornando mais natural seu contorno.
 
-Por fim, nosso ponto mais importante: devemos juntar o imagem que contém nosso lábio colorido com a imagem de entrada. Isso é possível com a função **gray()**, com ela fizemos uso do método **addWeighted** do OpenCV, para somar essas imagens com os respectivos pesos escolhidos. Também ela nós dá a oportunidade de setar o efeito Gray Effect que irá transforma a imagem em tons de cinza, exceto o lábio.
+Por fim, nosso ponto mais importante: devemos juntar a imagem que contém nosso lábio colorido com a imagem de entrada. Isso é possível com a função **gray()**, com ela fizemos uso do método **addWeighted** do OpenCV, para somar essas imagens com os respectivos pesos escolhidos. Também ela nós dá a oportunidade de setar o efeito Gray Effect que irá transforma a imagem em tons de cinza, exceto o lábio.
 
                
-
+~~~py
+def createBox(img,points,scale=5,masked=False,cropped = True): 
+    if masked: 
+     mask = np.zeros_like(img) 
+     mask = cv2.fillPoly(mask,[points],(255,255,255)) 
+     img = cv2.bitwise_and(img,mask)
+     
+    if cropped: 
+     bbox = cv2.boundingRect(points)
+     x,y,w,h = bbox 
+     imgCrop = img[y:y+h,x:x+w] 
+     imgCrop = cv2.resize(imgCrop,(0,0),None,scale,scale)
+     return imgCrop
+    else:
+     return mask 
+~~~
+A idéia da função **createBox** é capturar a região do lábio. Para isso, passamos nossa imagem de entrada e os pontos referentes a região do lábio. No corpo da função, criamos uma máscara que terá as mesmas dimenções da imagem de entrada e na cor preta, isso será necessário para desensamos os pontos desejados na mesma posição da imagem de entrada sendo necessário a função **fillPoly** do OpenCV. Ela irá desenhar o contorno do lábio com o preenchimento na cor branca. Com a opção **masked = True e crooped = false**, a função retorna a máscara com lábio branco e o fundo preto. A opção com **cropped = True** servirá para pŕóximas versões do projeto, com ela podemos fazer o recorte do lábio diretamente da imagem de entrada.
     
 
 
