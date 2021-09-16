@@ -2,7 +2,7 @@
 
 ## Descrição
 
-O provador de cores de batons, Lipstick Digital é um projeto desenvolvido para a disciplina de Processamento Digital de Imagens da Universidade Federal do Rio Grande do Norte(UFRN), foi baseado em um vídeo do canal <a href="https://www.youtube.com/watch?v=V2gmgkSqyi8&t=3s" target="_blank">Murtaza's Workshop</a>. 
+O Lipstick Digital é um projeto desenvolvido para a disciplina de Processamento Digital de Imagens da Universidade Federal do Rio Grande do Norte(UFRN), foi inspirado no canal <a href="https://www.youtube.com/watch?v=V2gmgkSqyi8&t=3s" target="_blank">Murtaza's Workshop</a>. 
 
 ## Introdução
 
@@ -25,8 +25,10 @@ Gray Effect, a opção com cores, o botão para capturar a imagem da câmera, a 
 a cor do batom e a opção sair.
 
 ![Interface Gráfica](/images/interface.png)
+###### Figura 1: Interface Gráfica.
 
-## Código e Funcionamento
+## Código 
+
 ~~~py
 import cv2
 import dlib
@@ -131,7 +133,6 @@ while True:
     ImgO = img.copy()
 
     detector = dlib.get_frontal_face_detector() 
-
     predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
     imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     faces = detector(imgGray) 
@@ -145,7 +146,8 @@ while True:
                 x = landmarks.part(n).x
                 y = landmarks.part(n).y
                 myPoints.append([x,y])
-                
+                #cv2.circle(ImgO,(x,y),2,(0,255,0),cv2.FILLED)  
+                              
             myPoints = np.array(myPoints) 
             imgLips = createBox(img,myPoints[48:61],3,True,False)   
                         
@@ -162,8 +164,57 @@ while True:
 
     cv2.waitKey(30)
 ~~~
-    
+ ## Funcionamento
 
+A seguir teremos um breve explicação dos conceitos e ferramentas utilizadas no projeto.
+
+
+ ~~~py
+    detector = dlib.get_frontal_face_detector() 
+    predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+    imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    faces = detector(imgGray) 
+ ~~~
+ Nas linhas de código acima, temos a parte responsável por instanciar os elementos da biblioteca. O método **detector** irá nos retornar os rostos encontrados na imagem e o **predictor** irá retornar os pontos de referência do rosto em questão com o arquivo **"shape_predictor_68_face_landmarks.dat"** teremos a rede neural treinada para detectar 68 pontos.
+ 
+~~~py
+for face in faces:
+    landmarks = predictor (imgGray,face) 
+    myPoints = [] 
+    for n in range(68):
+        x = landmarks.part(n).x
+        y = landmarks.part(n).y
+        myPoints.append([x,y])
+        #cv2.circle(ImgO,(x,y),2,(0,255,0),cv2.FILLED)  
+ ~~~
+ Neste trecho de código, atribuímos os pontos do rosto na variável **landmarks**, logo em seguida colocamos todos eles em uma lista **myPoints**. Por fim, temos a opção de ativar a linha comentada para ver os pontos marcados na imagem com o  método **circle**.
+ 
+ ~~~py
+ 
+myPoints = np.array(myPoints) 
+imgLips = createBox(img,myPoints[48:61],3,True,False)   
+
+ImgColor = np.zeros_like(imgLips) 
+ImgColor [:] = color
+
+ImgColor = cv2.bitwise_and(imgLips,ImgColor) 
+
+ImgColor = cv2.GaussianBlur(ImgColor,(7,7),10) 
+
+ImgColor = gray(ImgO,set) 
+
+cv2.imshow('Lipstick Digital',ImgColor)
+            
+~~~            
+ 
+Nessa parte, temos o núcleo do sistema, transformamos em um **myPoints** em **np.array** para que seja posssível passar os pontos do rosto para a função **createBox** (será explicava) que retornará nossa região alvo que são os lábios. Com o retorno dela setado em **imgLips** podemos fazer uma operação **bitwise_and** para colorir nosso lábio com a cor que está em **ImgColor**.
+
+>Observe que todas as imagens citadas até agora, contém as mesmas dimensões da imagem de entrada.
+>Isto é fundamental para que nosso "merge" de imagens tenha sucesso.
+
+Além disso, teremos que desfocar a imagem **ImgColor** que contém a forma do lábio já pintado. Para isso, utilizamos o método **GaussianBlur** que irá desfocar as bordas do nosso lábio tornando mais natural seu contorno.
+
+Por fim, nosso ponto mais importante: devemos juntar o imagem que contém nosso lábio colorido com a imagem de entrada. Isso é possível com a função **gray()**, com ela fizemos uso do método **addWeighted** do OpenCV, para somar essas imagens com os respectivos pesos escolhidos. Também ela nós dá a oportunidade de setar o efeito Gray Effect que irá transforma a imagem em tons de cinza, exceto o lábio.
 
                
 
