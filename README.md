@@ -21,7 +21,7 @@ A proposta do projeto é simular a cor de um batom através de um arquivo de ima
 
 ## Manual do Usuário
 Ao executar o programa, o usuário será solicitado a inserir uma imagem que será logo exibida. Depois isso, ele deverá digitar 
-**CTRL + P** para abrir o menu de opções. Entre as opções estão as denominadas cores: Aphrodite, Athena e Hera, o efeito 
+**CTRL + P** para abrir o menu de opções. Entre as opções estão as cores disponíveis: Aphrodite, Athena e Hera, o efeito 
 Gray Effect, a opção com cores, o botão para capturar a imagem da câmera, a opção de salvar a imagem, o botão de cancelar
 a cor do batom e a opção sair.
 
