@@ -50,8 +50,8 @@ def gray_color(*args):
     setgray = True 
 
 def colors(*args):
-    global set 
-    set = False    
+    global setgray 
+    setgray = False    
 
 def cam(*args):
     global webcam 
@@ -82,8 +82,8 @@ cv2.createButton("Exit",button_exit)
 
 cap = cv2.VideoCapture(0)
 
-def gray(img,set=False):
-        if set:
+def gray(img,setgray=False):
+        if setgray:
             ImgOG = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
             ImgOG = cv2.cvtColor(ImgOG,cv2.COLOR_GRAY2BGR)
             img = cv2.addWeighted(ImgOG,1,ImgColor,0.4,0)
