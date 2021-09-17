@@ -1,5 +1,7 @@
 # Lipstick Digital
 
+![Aphrodite](/images/Aphrodite.png)  ![Athena](/images/Athena.png) ![Hera](/images/hera.png)
+
 ## Descrição
 
 O Lipstick Digital é um projeto desenvolvido na disciplina de Processamento Digital de Imagens da Universidade Federal do Rio Grande do Norte(UFRN), foi inspirado no canal <a href="https://www.youtube.com/watch?v=V2gmgkSqyi8&t=3s" target="_blank">Murtaza's Workshop</a>. 
