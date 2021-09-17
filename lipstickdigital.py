@@ -23,6 +23,10 @@ webcam = False
 Egray = False
 set = False
 
+detector = dlib.get_frontal_face_detector() 
+
+predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+
 path = askopenfilename() 
 
 color = 0,0,0
@@ -112,9 +116,6 @@ while True:
     img = cv2.resize(img,(0,0),None,0.5,0.5) 
     ImgO = img.copy()
 
-    detector = dlib.get_frontal_face_detector() 
-
-    predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
     imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     faces = detector(imgGray) 
 
