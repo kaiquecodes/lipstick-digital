@@ -249,6 +249,10 @@ A idéia da função **createBox** é capturar a região do lábio. Para isso, p
 
 >A linha que consta um novo **bitwise_and** dá a possibilidade de termos a região do lábio a cores como na imagem de entrada. Já opção com **cropped = True** servirá para pŕóximas versões do projeto, com ela podemos fazer o recorte do lábio diretamente da imagem de entrada. Ambas linhas, serão aproveitadas em uma nova versão do programa que implementará mais requisitos.
 
-## Programa em execução e Resultados
+## Programa em execução e Resultados 
 
+O passa a passo do processo pode ser visto nas imagens abaixo:
+
+![Original](/images/img-original.png) ![Points](/images/points-face.png) ![Mask](/images/mask.png) 
+![color-aphrodite](/images/color-aphrodite.png)  ![lips-color.png](/images/lips-color.png)  ![Aphrodite.png](/images/Aphrodite.png) 
 
