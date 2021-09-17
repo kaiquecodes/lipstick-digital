@@ -2,7 +2,7 @@
 
 ## Descrição
 
-O Lipstick Digital é um projeto desenvolvido para a disciplina de Processamento Digital de Imagens da Universidade Federal do Rio Grande do Norte(UFRN), foi inspirado no canal <a href="https://www.youtube.com/watch?v=V2gmgkSqyi8&t=3s" target="_blank">Murtaza's Workshop</a>. 
+O Lipstick Digital é um projeto desenvolvido na disciplina de Processamento Digital de Imagens da Universidade Federal do Rio Grande do Norte(UFRN), foi inspirado no canal <a href="https://www.youtube.com/watch?v=V2gmgkSqyi8&t=3s" target="_blank">Murtaza's Workshop</a>. 
 
 ## Introdução
 
@@ -18,7 +18,6 @@ A proposta do projeto é simular a cor de um batom através de um arquivo de ima
 6. Execute na sua IDE favorita.
 
 ## Manual do Usuário
-
 Ao executar o programa, o usuário será solicitado a inserir uma imagem que será logo exibida. Depois isso, ele deverá digitar 
 **CTRL + P** para abrir o menu de opções. Entre as opções estão as denominadas cores: Aphrodite, Athena e Hera, o efeito 
 Gray Effect, a opção com cores, o botão para capturar a imagem da câmera, a opção de salvar a imagem, o botão de cancelar
@@ -213,6 +212,18 @@ Nessa parte, temos o núcleo do sistema, transformamos em um **myPoints** em **n
 
 Além disso, teremos que desfocar a imagem **ImgColor** que contém a forma do lábio já pintado. Para isso, utilizamos o método **GaussianBlur** do OpenCV que irá desfocar as bordas do nosso lábio tornando mais natural seu contorno.
 
+~~~py
+def gray(img,setgray=False):
+        if setgray:
+            ImgOG = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+            ImgOG = cv2.cvtColor(ImgOG,cv2.COLOR_GRAY2BGR)
+            img = cv2.addWeighted(ImgOG,1,ImgColor,0.4,0)
+            return img 
+        else:     
+            img = cv2.addWeighted(ImgO,1,ImgColor,0.4,0)
+            return img
+ ~~~           
+
 Por fim, nosso ponto mais importante: devemos juntar a imagem que contém nosso lábio colorido com a imagem de entrada. Isso é possível com a função **gray()**, com ela fizemos uso do método **addWeighted** do OpenCV, para somar essas imagens com os respectivos pesos escolhidos. Também ela nós dá a oportunidade de setar o efeito Gray Effect que irá transforma a imagem em tons de cinza, exceto o lábio.
 
                
@@ -234,7 +245,7 @@ def createBox(img,points,scale=5,masked=False,cropped = True):
 ~~~
 A idéia da função **createBox** é capturar a região do lábio. Para isso, passamos nossa imagem de entrada e os pontos referentes a região do lábio. No corpo da função, criamos uma máscara que terá as mesmas dimenções da imagem de entrada e na cor preta, isso é necessário para desenharmos os pontos desejados na mesma posição da imagem de entrada. A função **fillPoly** do OpenCV irá desenhar o contorno do lábio de forma poligonal com o preenchimento na cor branca, de forma a torna a aproximação da região mais precisa. Com a opção **masked = True e crooped = false**, a função retorna a máscara com lábio branco e o fundo preto. 
 
->A linha que consta um novo **bitwise_and** dá a possibilidade de termos a região do lábio a cores como na imagem de entrada. Já opção com **cropped = True** >servirá para pŕóximas versões do projeto, com ela podemos fazer o recorte do lábio diretamente da imagem de entrada. Ambas linhas, serão aproveitadas em uma nova versão do programa que implementará mais requisitos
+>A linha que consta um novo **bitwise_and** dá a possibilidade de termos a região do lábio a cores como na imagem de entrada. Já opção com **cropped = True** servirá para pŕóximas versões do projeto, com ela podemos fazer o recorte do lábio diretamente da imagem de entrada. Ambas linhas, serão aproveitadas em uma nova versão do programa que implementará mais requisitos.
 
 ## Programa em execução e Resultados
 
