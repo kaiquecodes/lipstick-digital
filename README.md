@@ -40,8 +40,7 @@ root = Tk()
 root.withdraw()
 
 webcam = False
-Egray = False
-set = False
+setgray = False
 
 detector = dlib.get_frontal_face_detector() 
 predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
@@ -66,8 +65,8 @@ def hera_color(*args):
     return color   
 
 def gray_color(*args):
-    global set 
-    set = True 
+    global setgray 
+    setgray = True 
 
 def colors(*args):
     global set 
@@ -159,7 +158,7 @@ while True:
             
             ImgColor = cv2.GaussianBlur(ImgColor,(7,7),10) 
             
-            ImgColor = gray(ImgO,set) 
+            ImgColor = gray(ImgO,setgray) 
 
             cv2.imshow('Lipstick Digital',ImgColor)
 
@@ -201,7 +200,7 @@ ImgColor = cv2.bitwise_and(imgLips,ImgColor)
 
 ImgColor = cv2.GaussianBlur(ImgColor,(7,7),10) 
 
-ImgColor = gray(ImgO,set) 
+ImgColor = gray(ImgO,setgray) 
 
 cv2.imshow('Lipstick Digital',ImgColor)
             
