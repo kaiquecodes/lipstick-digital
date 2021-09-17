@@ -174,8 +174,6 @@ A seguir teremos um breve explicação dos conceitos e ferramentas utilizadas no
  ~~~py
     detector = dlib.get_frontal_face_detector() 
     predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
-    imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-    faces = detector(imgGray) 
  ~~~
  Nas linhas de código acima, temos a parte responsável por instanciar os elementos da biblioteca. O método **detector** irá nos retornar os rostos encontrados na imagem e o **predictor** irá retornar os pontos de referência do rosto em questão com o arquivo **"shape_predictor_68_face_landmarks.dat"** teremos a rede neural treinada para detectar 68 pontos.
  
